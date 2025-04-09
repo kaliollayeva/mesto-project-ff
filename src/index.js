@@ -1,7 +1,7 @@
 import "./index.css";
 import { createCard, toggleLike } from "./components/card";
 import { closeModal, openModal, closeByOverlayClick } from "./components/modal";
-import { enableValidation } from "./components/validation";
+import { enableValidation, clearValidation } from "./components/validation";
 import {
   getUserInfo,
   getCards,
@@ -82,15 +82,13 @@ const updateProfileData = (userInfo) => {
 
 Promise.all(promises)
   .then((data) => {
-    console.log(data);
     const userInfo = data[0];
     const cards = data[1];
 
     currentUser = userInfo;
 
-    updateProfileData(userInfo); // обновляем информацию о профиле
-    renderCards(cards, userInfo); // рендерим карточки
-    // console.log(userInfo._id);
+    updateProfileData(userInfo); 
+    renderCards(cards, userInfo); 
   })
   .catch((error) => console.log(error.message));
 
@@ -142,7 +140,7 @@ function openPopupImage(cardImage) {
 
 function submitFormEditProfile(evt) {
   evt.preventDefault();
-
+  clearValidation(formEditProfile, validationConfig);
   let updatedName = nameInput.value;
   let updatedJob = jobInput.value;
   saveLoading(true, profileSaveButton, "Сохранить");
@@ -160,6 +158,7 @@ formEditProfile.addEventListener("submit", submitFormEditProfile);
 
 formNewPlace.addEventListener("submit", function (evt) {
   evt.preventDefault();
+  clearValidation(formNewPlace, validationConfig);
   const newCardName = cardNameInput.value;
   const newCardLink = urlInput.value;
   saveLoading(true, newCardSaveButton, "Создать");
@@ -206,6 +205,7 @@ const newAvatarUrlInput = formNewAvatar.querySelector(".popup__input_type_url");
 
 formNewAvatar.addEventListener("submit", (evt) => {
   evt.preventDefault();
+  clearValidation(formNewAvatar, validationConfig);
   const updatedAvatar = newAvatarUrlInput.value;
   saveLoading(true, newAvatarSaveButton, "Сохранить");
 
