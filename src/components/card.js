@@ -48,14 +48,15 @@ export function toggleLike(el, likesNumber, cardId) {
       likesNumber.textContent = card.likes.length;
       console.log(card.likes.length);
       el.classList.remove("card__like-button_is-active");
-    });
+    })
+    .catch((error) => console.log(error));
   } else {
     putLike(cardId).then((card) => {
       console.log(card.likes.length);
       el.classList.add("card__like-button_is-active");
-
       likesNumber.textContent = card.likes.length;
-    });
+    })
+    .catch((error) => console.log(error));
   }
 }
 

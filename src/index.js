@@ -108,10 +108,12 @@ function fillProfileEditForm() {
 
 buttonEdit.addEventListener("click", function () {
   fillProfileEditForm();
+  clearValidation(formEditProfile, validationConfig);
   openModal(popUpEdit);
 });
 
 buttonAdd.addEventListener("click", function () {
+  clearValidation(formNewPlace, validationConfig);
   openModal(popUpNewCard);
 });
 
@@ -198,6 +200,7 @@ formDeleteYes.addEventListener("submit", (evt) => {
 });
 
 renewAvatar.addEventListener("click", function () {
+  clearValidation(formNewAvatar, validationConfig);
   openModal(popUpRenewAvatar);
 });
 
